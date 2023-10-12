@@ -14,6 +14,8 @@ public class S_TrackDestruction : MonoBehaviour
 
     private void Start()
     {
+        //I do this to seperate the renderer and the mesh as to not effect physics when the renderer is shaking
+        //There may be a better way to do this, but this is the best I could come up with :sweat:
         CreateVisualObject();
     }
 
@@ -21,7 +23,7 @@ public class S_TrackDestruction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(ChangeColorAndDelete());
+            StartCoroutine(ChangeColorThenDelete());
         }
     }
 
@@ -43,7 +45,7 @@ public class S_TrackDestruction : MonoBehaviour
         GetComponent<Renderer>().enabled = false;
     }
 
-    private IEnumerator ChangeColorAndDelete()
+    private IEnumerator ChangeColorThenDelete()
     {
         objectRenderer = visualObject.GetComponent<Renderer>();
         initialVisualPosition = visualObject.transform.localPosition;
